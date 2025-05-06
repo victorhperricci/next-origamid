@@ -1,7 +1,6 @@
 import { ProductItem } from "./ProductItem";
 
 export type Produto = {
-  id?: string;
   nome: string;
   preco: number;
   descricao: string;
@@ -9,17 +8,38 @@ export type Produto = {
   importado: 0 | 1;
 };
 
+export type ProdutoResponse = Produto & {
+  id: string;
+};
+
 export default async function ListaProdutos() {
-  const response = await fetch("https://api.origamid.online/produtos", {
-    next: {
-      tags: ["produtos"],
-    },
-  });
-  const data = (await response.json()) as Produto[];
+  let produtos: ProdutoResponse[] = [];
+
+  try {
+    const response = await fetch("https://api.origamid.online/produtos", {
+      next: {
+        tags: ["produtos"],
+      },
+      cache: "no-cache",
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar os produtos");
+    }
+
+    produtos = (await response.json()) as ProdutoResponse[];
+  } catch (error) {
+    return (
+      <div>
+        <p>Ocorreu um erro ao buscar os produtos, tente novamente</p>
+        {/* <p>{(error as Error).message}</p> */}
+      </div>
+    );
+  }
 
   return (
     <ul>
-      {data.map((produto) => (
+      {produtos.map((produto) => (
         <ProductItem key={produto.id} {...produto} />
       ))}
     </ul>
