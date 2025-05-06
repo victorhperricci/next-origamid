@@ -1,14 +1,11 @@
 "use client";
 
-import { Produto } from "./serverFetch";
-import Link from "next/link";
+import { Produto } from "./productList";
 
 export function ProductItem({ ...produto }: Produto) {
   return (
     <li>
-      {produto.nome}
-
-      <Link href={`/produtos/${produto.id}`}>Ver Mais</Link>
+      {produto.nome}: <span>R$ {produto.preco}</span>
     </li>
   );
 }

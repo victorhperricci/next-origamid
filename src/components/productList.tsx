@@ -1,14 +1,20 @@
 import { ProductItem } from "./ProductItem";
 
 export type Produto = {
+  id?: string;
   nome: string;
-  id: number;
   preco: number;
   descricao: string;
+  estoque: number;
+  importado: 0 | 1;
 };
 
-export default async function ServerFetch() {
-  const response = await fetch("https://api.origamid.online/produtos");
+export default async function ListaProdutos() {
+  const response = await fetch("https://api.origamid.online/produtos", {
+    next: {
+      tags: ["produtos"],
+    },
+  });
   const data = (await response.json()) as Produto[];
 
   return (

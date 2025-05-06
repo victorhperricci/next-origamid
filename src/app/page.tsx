@@ -1,5 +1,4 @@
 import { getCookie } from "@/actions/get-cookie";
-import ServerFetch from "@/components/serverFetch";
 import { ShowCookie } from "@/components/showCookie";
 
 export default async function Home() {
@@ -9,7 +8,7 @@ export default async function Home() {
     <main>
       <h1>Homeee</h1>
       {/* <Access /> */}
-      <ServerFetch />
+      {/* <ServerFetch /> */}
       {hasCookie && <ShowCookie />}
     </main>
   );

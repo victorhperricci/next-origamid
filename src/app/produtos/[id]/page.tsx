@@ -1,4 +1,4 @@
-import { Produto } from "@/components/serverFetch";
+import { Produto } from "@/components/productList";
 
 interface ProductProps {
   params: Promise<{

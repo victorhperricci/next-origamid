@@ -6,29 +6,33 @@ export default async function Menu() {
 
   return (
     <ul className="menu">
-      <li>
+      {/* <li>
         <Link href="/">Home</Link>
+      </li> */}
+
+      <li>
+        <Link href="/produtos">Produtos</Link>
       </li>
 
       <li>
-        <Link href="/about">Sobre</Link>
+        <Link href="/produtos/adicionar">Adicionar produto</Link>
       </li>
 
-      <li>
+      {/* <li>
         <Link href="/imc">IMC</Link>
-      </li>
+      </li> */}
 
-      <li>
+      {/* <li>
         <Link href="/contact">Contato</Link>
-      </li>
+      </li> */}
 
-      <li>
+      {/* <li>
         <Link href="/cursos">Cursos</Link>
       </li>
 
       <li>
         <Link href="/acoes">Ações</Link>
-      </li>
+      </li> */}
 
       {hasToken ? (
         <li>
