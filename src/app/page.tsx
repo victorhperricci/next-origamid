@@ -1,13 +1,16 @@
-import Access from "@/components/acess";
+import { getCookie } from "@/actions/get-cookie";
 import ServerFetch from "@/components/serverFetch";
+import { ShowCookie } from "@/components/showCookie";
 
-export default function Home() {
+export default async function Home() {
+  const hasCookie = (await getCookie("token")) !== null;
 
   return (
     <main>
       <h1>Homeee</h1>
-      <Access />
+      {/* <Access /> */}
       <ServerFetch />
+      {hasCookie && <ShowCookie />}
     </main>
   );
 }
