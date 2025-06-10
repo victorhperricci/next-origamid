@@ -1,4 +1,4 @@
-import { getCurso } from "@/api/cursos";
+import { getCurso, getCursos } from "@/api/cursos";
 import { Aula } from "../../types/curso.type";
 
 interface AulaPage {
@@ -29,4 +29,23 @@ export default async function AulaPage({ params }: AulaPage) {
       <p>Duração: {detalhesAula.tempo}</p>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const cursos = await getCursos(); // Ensure cursos are fetched before generating params
+  const aulas = await Promise.all(cursos.map((curso) => getCurso(curso.slug)));
+
+  return aulas
+    .reduce((acc: Aula[], curso) => {
+      if (curso && "aulas" in curso) {
+        curso.aulas.forEach((aula) => {
+          acc.push({ ...aula, curso_id: curso.id } as Aula);
+        });
+      }
+      return acc;
+    }, [])
+    .map((aula) => ({
+      curso: cursos.find((c) => c.id === aula.curso_id)?.slug || "",
+      aula: aula.slug,
+    }));
 }

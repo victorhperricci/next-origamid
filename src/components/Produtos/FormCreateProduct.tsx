@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Produto } from "../productList";
-import { revalidatePathAction } from "@/actions/revalidatePath";
-import { redirect } from "next/navigation";
+// import { revalidatePathAction } from "@/actions/revalidatePath";
+// import { redirect } from "next/navigation";
 
 const schema = yup.object().shape({
   nome: yup.string().required("Nome é obrigatório"),
@@ -68,23 +68,19 @@ export default function FormCreateProduct() {
 
   // ======================================
 
-  const [state, formAction] = useActionState(createProduct, {
+  const [, formAction] = useActionState(createProduct, {
     errors: {},
   });
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<Produto>({
+  const { register } = useForm<Produto>({
     resolver: yupResolver(schema),
   });
 
-  async function onSubmit(data: Produto) {
-    // await createProduct(data);
-    // await revalidatePathAction({ type: "revalidate-tag", key: "produtos" });
-    // redirect("/produtos");
-  }
+  // async function onSubmit(data: Produto) {
+  //   // await createProduct(data);
+  //   // await revalidatePathAction({ type: "revalidate-tag", key: "produtos" });
+  //   // redirect("/produtos");
+  // }
 
   return (
     <form

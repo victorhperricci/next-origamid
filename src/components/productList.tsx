@@ -28,7 +28,8 @@ export default async function ListaProdutos() {
     }
 
     produtos = (await response.json()) as ProdutoResponse[];
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (err) {
     return (
       <div>
         <p>Ocorreu um erro ao buscar os produtos, tente novamente</p>

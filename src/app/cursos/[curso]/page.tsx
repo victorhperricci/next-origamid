@@ -1,6 +1,7 @@
-import { getCurso } from "@/api/cursos";
+import { getCurso, getCursos } from "@/api/cursos";
 import Link from "next/link";
 import { CursoDetalhe } from "../types/curso.type";
+import { Metadata } from "next";
 
 interface CursoPage {
   params: Promise<{ curso: string }>;
@@ -45,4 +46,24 @@ export default async function CursoPage({ params }: CursoPage) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const cursos = await getCursos(); // Ensure cursos are fetched before generating params
+  return cursos.map((curso) => ({
+    curso: curso.slug,
+  }));
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Cursos",
+    description: "Lista de cursos disponíveis",
+    openGraph: {
+      title: "Cursos",
+      description: "Lista de cursos disponíveis",
+      url: "/cursos",
+      siteName: "Cursos",
+    },
+  };
 }
