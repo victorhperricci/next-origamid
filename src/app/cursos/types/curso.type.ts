@@ -19,4 +19,5 @@ export type Aula = {
 
 export type CursoDetalhe = Curso & {
   aulas: Aula[];
+  error?: string;
 };

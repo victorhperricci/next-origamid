@@ -12,7 +12,7 @@ export default async function CursoPage({ params }: CursoPage) {
 
   const detalhesCurso = (await getCurso(curso)) as CursoDetalhe;
 
-  if (!detalhesCurso) {
+  if (!detalhesCurso || detalhesCurso.error) {
     return (
       <div>
         <h1>{`Curso ${curso} não encontrado`}</h1>
@@ -49,21 +49,21 @@ export default async function CursoPage({ params }: CursoPage) {
 }
 
 export async function generateStaticParams() {
-  const cursos = await getCursos(); // Ensure cursos are fetched before generating params
+  const cursos = await getCursos();
   return cursos.map((curso) => ({
     curso: curso.slug,
   }));
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CursoPage): Promise<Metadata> {
+  const { curso } = await params;
+  const cursoFetched = await getCurso(curso);
+
   return {
-    title: "Cursos",
-    description: "Lista de cursos disponíveis",
-    openGraph: {
-      title: "Cursos",
-      description: "Lista de cursos disponíveis",
-      url: "/cursos",
-      siteName: "Cursos",
-    },
+    title: `Curso ${cursoFetched.nome}`,
+    keywords: ["cursos", "educação", "aulas", curso],
+    description: cursoFetched.descricao,
   };
 }
