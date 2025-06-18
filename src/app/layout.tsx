@@ -1,6 +1,7 @@
 import Menu from "@/components/menu";
 import type { Metadata } from "next";
 import "./globals.css";
+import { font_body } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Dogs",
@@ -14,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
+      <body className={`${font_body.className} ${font_body.variable}`}>
         <Menu />
         {children}
       </body>

@@ -56,6 +56,10 @@ export default function Menu() {
         <Link href="/cursos">Cursos</Link>
       </li>
 
+      <li>
+        <Link href="/animais">Animais</Link>
+      </li>
+
       {/* <li>
         <Link href="/acoes">Ações</Link>
       </li> */}

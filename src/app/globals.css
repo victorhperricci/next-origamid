@@ -30,7 +30,7 @@ button {
 h1,
 h2,
 h3 {
-  font-family: var(--font-title);
+  font-family: var(--font-body);
 }
 
 h1,
@@ -116,10 +116,16 @@ hr {
   margin: 2rem auto;
 }
 
-video,
-img {
+video {
   max-width: 100%;
   display: block;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: auto;
 }
 
 .flex {
